@@ -1,4 +1,4 @@
-const tasks = [
+let tasks = [
   {
     id: '1',
     title: 'Study Express routing',
@@ -6,3 +6,4 @@ const tasks = [
     createdAt: '2026-11-19T10:00:00Z',
   },
 ];
+export default tasks;

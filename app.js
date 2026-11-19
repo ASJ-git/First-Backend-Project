@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import tasks from './tasks.js';
+
 const app = express();
 app.use(express.json());
-
-let tasks = [];
-let nextId = 1;
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/api/v1/tasks', (req, res) => res.json(tasks));
 
@@ -11,7 +11,7 @@ app.post('/api/v1/tasks', (req, res) => {
   const { title } = req.body;
   if (!title) return res.status(400).json({ error: 'title is required' });
   const task = {
-    id: String(nextId++),
+    id: tasks.length + 1,
     title,
     completed: false,
     createdAt: new Date(),
@@ -20,4 +20,7 @@ app.post('/api/v1/tasks', (req, res) => {
   res.status(201).json(task);
 });
 
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT ?? 8000;
+app.listen(PORT, () => {
+  console.log(`Server runing on port ${PORT}`);
+});
