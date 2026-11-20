@@ -11,7 +11,7 @@ app.post('/api/v1/tasks', (req, res) => {
   const { title } = req.body;
   if (!title) return res.status(400).json({ error: 'title is required' });
   const task = {
-    id: tasks.length + 1,
+    id: String(tasks.length + 1),
     title,
     completed: false,
     createdAt: new Date(),
